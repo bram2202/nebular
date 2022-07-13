@@ -2,10 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   ComponentFactoryResolver,
+  EventEmitter,
   Inject,
   Input,
   OnInit,
   Optional,
+  Output,
   Type,
 } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -82,6 +84,10 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
   }
   _singleColumn: boolean;
   static ngAcceptInputType_singleColumn: NbBooleanInput;
+
+  @Output() get dateTimeChange(): EventEmitter<D> {
+    return this.valueChange as EventEmitter<D>;
+  }
 
   constructor(@Inject(NB_DOCUMENT) document,
               positionBuilder: NbPositionBuilderService,
